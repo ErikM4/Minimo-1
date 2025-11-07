@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.upc.dsa</groupId>
-    <artifactId>rest-example2</artifactId>
+    <artifactId>BibliotecaManager</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>rest-example2</name>
+    <name>BibliotecaManager</name>
 
     <dependencyManagement>
         <dependencies>
@@ -64,6 +64,10 @@
             <version>2.3.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.32</version> </dependency>
 
     </dependencies>
 
