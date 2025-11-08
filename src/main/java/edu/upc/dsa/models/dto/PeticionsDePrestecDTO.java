@@ -1,15 +1,13 @@
 package edu.upc.dsa.models.dto;
 
-// Un DTO simple per encapsular la petició de préstec
-public class PrestecRequestDTO
+public class PeticionsDePrestecDTO
 {
     String idLector;
     String isbn;
 
-    // Constructor buit, getters i setters són necessaris per a JAX-RS
-    public PrestecRequestDTO() {}
+    public PeticionsDePrestecDTO() {}
 
-    public PrestecRequestDTO(String idLector, String isbn)
+    public PeticionsDePrestecDTO(String idLector, String isbn)
     {
         this.idLector = idLector;
         this.isbn = isbn;

@@ -1,22 +1,13 @@
 package edu.upc.dsa;
 
-// Imports de JUnit 4
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import static org.junit.Assert.*;
 
-// Import del Logger
 import org.apache.log4j.Logger;
 
-// Imports del nostre codi
 import edu.upc.dsa.exceptions.*;
-import edu.upc.dsa.models.Lector;
-import edu.upc.dsa.models.Llibre;
-import edu.upc.dsa.models.LlibreCatalogat;
-import edu.upc.dsa.models.Prestec;
+import edu.upc.dsa.models.*;
 
-import java.util.Date;
 import java.util.List;
 
 public class BibliotecaManagerTest

@@ -13,7 +13,6 @@ public class LlibreCatalogat
 
     public LlibreCatalogat() {}
 
-    // Constructor per crear un nou llibre al catàleg a partir d'un llibre físic
     public LlibreCatalogat(Llibre llibre)
     {
         this.isbn = llibre.getIsbn();

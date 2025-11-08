@@ -1,14 +1,12 @@
 package edu.upc.dsa;
 
-import edu.upc.dsa.models.Lector;
-import edu.upc.dsa.models.Llibre;
-import edu.upc.dsa.models.LlibreCatalogat;
-import edu.upc.dsa.models.Prestec;
+import edu.upc.dsa.models.*;
 import edu.upc.dsa.exceptions.*;
 
 import java.util.List;
 
-public interface BibliotecaManager {
+public interface BibliotecaManager
+{
 
     public Lector afegirUnNouLector(Lector lector);
 
@@ -16,8 +14,7 @@ public interface BibliotecaManager {
 
     public LlibreCatalogat catalogarUnLlibre() throws MagatzemBuitException;
 
-    public Prestec prestarUnLlibre(String idLector, String isbn)
-            throws LectorNoExisteixException, LlibreNoExisteixException, NoHiHaExemplarsException;
+    public Prestec prestarUnLlibre(String idLector, String isbn) throws LectorNoExisteixException, LlibreNoExisteixException, NoHiHaExemplarsException;
 
     public List<Prestec> consultarPrestecsLector(String idLector);
 

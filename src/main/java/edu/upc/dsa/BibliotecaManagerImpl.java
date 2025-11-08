@@ -1,16 +1,12 @@
 package edu.upc.dsa;
 
 import edu.upc.dsa.exceptions.*;
-import edu.upc.dsa.models.Lector;
-import edu.upc.dsa.models.Llibre;
-import edu.upc.dsa.models.LlibreCatalogat;
-import edu.upc.dsa.models.Prestec;
+import edu.upc.dsa.models.*;
 
 import org.apache.log4j.Logger;
 
 import java.util.*;
-import java.text.SimpleDateFormat; // <--- AFEGEIX AQUEST
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 
 
 public class BibliotecaManagerImpl implements BibliotecaManager
@@ -20,7 +16,7 @@ public class BibliotecaManagerImpl implements BibliotecaManager
     private static BibliotecaManager instance;
 
     private Map<String, Lector> lectorsMap;
-    private LinkedList<Stack<Llibre>> magatzem; // Cua de Piles
+    private LinkedList<Stack<Llibre>> magatzem; //Cua de Piles
     private Map<String, LlibreCatalogat> cataleg;
     private Map<String, List<Prestec>> prestecsPerLectorMap;
 
@@ -63,7 +59,9 @@ public class BibliotecaManagerImpl implements BibliotecaManager
             logger.info("No hi ha munts, es crearà el primer munt.");
             ultimMunt = new Stack<>();
             this.magatzem.add(ultimMunt);
-        } else {
+        }
+        else
+        {
             ultimMunt = this.magatzem.getLast();
         }
 
@@ -84,7 +82,6 @@ public class BibliotecaManagerImpl implements BibliotecaManager
 
         if (this.magatzem.isEmpty())
         {
-            // **ARREGLAT:** Passar el missatge a l'excepció
             String errorMsg = "Error: El magatzem és completament buit.";
             logger.error(errorMsg);
             throw new MagatzemBuitException(errorMsg);
@@ -130,7 +127,7 @@ public class BibliotecaManagerImpl implements BibliotecaManager
             this.cataleg.put(lc.getIsbn(), lc);
         }
 
-        logger.info("Fin: catalogarUnLlibre. Estat catàleg: " + lc);
+        logger.info("Estat catàleg: " + lc);
         return lc;
     }
 
@@ -138,7 +135,7 @@ public class BibliotecaManagerImpl implements BibliotecaManager
     public Prestec prestarUnLlibre(String idLector, String isbn) throws LectorNoExisteixException, LlibreNoExisteixException, NoHiHaExemplarsException
     {
 
-        logger.info("Inicio: prestarUnLlibre(idLector=" + idLector + ", isbn=" + isbn + ")");
+        logger.info("prestarUnLlibre(idLector=" + idLector + ", isbn=" + isbn + ")");
 
         Lector lector = this.lectorsMap.get(idLector);
         if (lector == null)
@@ -166,44 +163,40 @@ public class BibliotecaManagerImpl implements BibliotecaManager
         logger.info("Validacions correctes. Realitzant préstec.");
         lc.setQuantitatDisponible(lc.getQuantitatDisponible() - 1);
         String idPrestec = java.util.UUID.randomUUID().toString(); // ID aleatori
-        // 1. Definim el format de text que volem
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-        // 2. Obtenim els objectes Date
         Date dataPrestecObject = new Date(); // Data actual
         Calendar cal = Calendar.getInstance();
         cal.setTime(dataPrestecObject);
         cal.add(Calendar.DAY_OF_YEAR, 15);
         Date dataDevolucioObject = cal.getTime();
 
-        // 3. Els convertim a String
         String dataPrestecString = df.format(dataPrestecObject);
         String dataDevolucioString = df.format(dataDevolucioObject);
 
-        // 4. Cridem el constructor amb els Strings
         Prestec prestec = new Prestec(idPrestec, idLector, isbn, dataPrestecString, dataDevolucioString);
         this.prestecsPerLectorMap.putIfAbsent(idLector, new ArrayList<>());
         this.prestecsPerLectorMap.get(idLector).add(prestec);
 
-        logger.info("Fin: Préstec creat correctament: " + prestec);
+        logger.info("Préstec creat correctament: " + prestec);
         return prestec;
     }
 
     @Override
     public List<Prestec> consultarPrestecsLector(String idLector)
     {
-        logger.info("Inicio: consultarPrestecsLector(idLector=" + idLector + ")");
+        logger.info("consultarPrestecsLector(idLector=" + idLector + ")");
         List<Prestec> prestecs = this.prestecsPerLectorMap.get(idLector);
         if (prestecs == null)
         {
             logger.info("El lector " + idLector + " no té cap préstec. Retornant llista buida.");
             return new ArrayList<>();
         }
-        logger.info("Fin: Retornant " + prestecs.size() + " préstecs per al lector " + idLector);
+        logger.info("Retornant " + prestecs.size() + " préstecs per al lector " + idLector);
         return prestecs;
     }
 
-    // --- Mètodes auxiliars per a proves ---
+    //Mètodes auxiliars per a proves
 
     @Override
     public int sizeLectors()

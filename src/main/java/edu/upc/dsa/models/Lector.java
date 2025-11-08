@@ -1,7 +1,5 @@
 package edu.upc.dsa.models;
 
-import java.util.Date; //L'utilitzo per la data de naixement
-
 public class Lector
 {
     String id;
@@ -12,7 +10,6 @@ public class Lector
     String llocNaixement;
     String adreca;
 
-    // Constructor buit
     public Lector() {}
 
     public Lector(String id, String nom, String cognoms, String dni, String dataNaixement, String llocNaixement, String adreca)
